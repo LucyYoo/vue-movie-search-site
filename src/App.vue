@@ -1,15 +1,15 @@
 <template>
   <h1>영화 검색</h1>
-  <form @submit.prevent="SearchMovie">
-    <input
-      type="text"
+  <form @submit.prevent="searchMovie">
+    <input 
+      type="text" 
       @input="title = $event.target.value" />
-    <button> 검색 </button>
+    <button>검색</button>
     <ul>
       <li
-        v-for="movie in movies"
+        v-for="movie in moveList"
         :key="movie.imdbID">
-        {{ movie.Title }} 
+        {{ movie.Title }}
         <button>상세보기</button>
       </li>
     </ul>
@@ -21,24 +21,24 @@
 export default {
   data() {
     return {
-      movies: {
-        type: [],
-        default: () => {[];}
-      },
       title: {
         type: String,
-        default: ''
-      }
+        default: "",
+      },
     };
   },
-  created() {
-    this.SearchMovie();
+  computed: {
+    moveList() {
+      return this.$store.state.fetch.movieList;
+    },
   },
   methods: {
-    async SearchMovie(){
-      const res = await this.$fetch(this.title);
-      this.movies = [...res.Search];    
-    },
-  }
+    async searchMovie(){
+      await this.$store.dispatch("fetch/fetchMovieList", {
+        title: this.title,
+      });
+    
+    }
+  },
 };
 </script>

@@ -1,7 +1,7 @@
 import * as Vue from "vue";
 import App from "~/App";
-import fetchPlugin from '~/plugins/fetch';
+import store from "~/store";
 
 const app = Vue.createApp(App);
-app.use(fetchPlugin);
+app.use(store);
 app.mount("#app");
