@@ -1,16 +1,18 @@
 <template>
-  <div @click="onModal">
+  <div
+    @click="onModal">
     <slot></slot>
   </div>
   <template v-if="modelValue">
     <div
+      v-if="!isLoading"
       class="modal"
       @click="offModal">
       <div
         class="modal__inner"
         @click.stop>
         <button
-          class="close"
+          class="modal__inner--close"
           @click="offModal">
           x
         </button>
@@ -28,16 +30,13 @@ export default {
       type: Boolean,
       default: false
     },
-    closeable: {
-      type: Boolean,
-      default: false
-    },
-    info: {
-      type: Object,
-      default: () => ({})
-    }
   },
   emits: ['update:modelValue'],
+  computed: {
+    isLoading() {
+      return this.$store.state.fetch.isLoading;
+    }
+  },
   watch: {
     modelValue(newValue) {
       if(newValue){
@@ -59,7 +58,7 @@ export default {
     },
     offModal() {
       this.$emit('update:modelValue', false);
-    }
+    },
   }
 };
 </script>
@@ -86,7 +85,14 @@ export default {
         max-height: 900px;
         overflow-y: auto;
         box-shadow: 0px 10px 10px rgba(black, .2);
-
+        text-align: right;
+    &--close{
+      background-color: transparent;
+      border: none;
+      font-size: 1.5rem;
+      &:hover{
+      }
+    }
     }
 }
 </style>
