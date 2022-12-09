@@ -1,13 +1,11 @@
-import { API_KEY } from "../../apikey";
-
-const API_END_POINT = `https://www.omdbapi.com?apikey=${API_KEY}`;
-
 export default {
   namespaced: true,
   state() {
     return {
       movieList: [],
-      movieInfo: {}
+      movieInfo: {},
+      isLoading: false,
+      page: 1,
     };
   },
   getters: {},
@@ -17,31 +15,48 @@ export default {
     },
     viewMovieInfo (state, payload) {
       state.movieInfo = payload;
-      console.log(state.movieInfo);
+    },
+    loadingMovie(state){
+      state.isLoading = !state.isLoading;
     }
   },
   actions: {
     fetchMovieList: async ({commit}, payload) =>  {
-      const { title } = payload;
+      const { title, page = 1 } = payload;
+      const url = `&s=${title}&page=${page}`;
       try {
-        const movieList = await fetch(`${API_END_POINT}&s=${title}`, {
+        commit('loadingMovie');
+        const movieList = await fetchMovie({
           method: "GET",
-        }).then(res => res.json());
+          url
+        });
         commit('changeMovieList', movieList);
+        commit('loadingMovie');
       } catch (e) {
         console.error(e.message);
       }
     },
     fetchMoiveInfo: async ({commit}, payload) => {
       const {imdbID} = payload;
+      const url = `&i=${imdbID}&plot=full`;
       try{
-        const movieInfo = await fetch(`${API_END_POINT}&i=${imdbID}&plot=full`, {
+        commit('loadingMovie');
+        const movieInfo = await fetchMovie({
           method: "GET",
-        }).then(res => res.json());
+          url
+        });
         commit('viewMovieInfo', movieInfo);
+        commit('loadingMovie');
       } catch(e) {
         console.error(e.message);
       }
-    }
+    },
   },
 };
+
+async function fetchMovie(options) {
+  return await fetch("/.netlify/functions/movie", {
+    method: "POST",
+    body: JSON.stringify(options)
+  }).then(res => res.json());
+}
