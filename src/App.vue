@@ -20,7 +20,7 @@
   </form>
   <ul class="main__moveList">
     <MovieInfoModal
-      v-if="(movieList && movieList.length > 0)"
+      v-if="movieList.length > 0"
       v-model="isShow">
       <div
         :class="{wrapper: isShow}"
@@ -34,13 +34,24 @@
             img-top
             img-width="250px"
             img-height="400px"
-            @click="viewMovieinfo(movie.imdbID); fixScroll()">
+            @click="viewMovieinfo(movie.imdbID); modal()">
             <b-card-text>
               {{ movie.Year }}
             </b-card-text>
           </b-card>
         </li>
       </div>
+      <div class="buttons">
+        <button
+          @click="movePage('prev')">
+          이전페이지
+        </button>
+        <button 
+          @click="movePage('next')">
+          다음 페이지
+        </button>
+      </div>
+      
       <template
         #movieInfoModal>
         <div
@@ -52,14 +63,6 @@
       </template>
     </MovieInfoModal>
   </ul>
-  <button 
-    @click="movePage('prev')">
-    이전페이지
-  </button>
-  <button 
-    @click="movePage('next')">
-    다음 페이지
-  </button>
 </template>
 
 <script>
@@ -113,6 +116,9 @@ export default {
         this.page < 100 ? this.page += 1 : this.page;
       }
       this.searchMovie();
+    },
+    modal() {
+      this.isShow = true;
     }
   },
 };
@@ -168,6 +174,12 @@ li {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 50px;
 }
 
 </style>

@@ -1,11 +1,10 @@
 <template>
-  <div
-    @click="onModal">
+  <div>
     <slot></slot>
   </div>
   <template v-if="modelValue">
     <div
-      v-if="!isLoading"
+      v-if="(!isLoading && movieInfo.Title)"
       class="modal"
       @click="offModal">
       <div
@@ -35,7 +34,7 @@ export default {
   computed: {
     isLoading() {
       return this.$store.state.fetch.isLoading;
-    }
+    },
   },
   watch: {
     modelValue(newValue) {
@@ -52,9 +51,6 @@ export default {
         console.log('ESC!!');
         this.offModal();
       }
-    },
-    onModal() {
-      this.$emit('update:modelValue', true);
     },
     offModal() {
       this.$emit('update:modelValue', false);
@@ -90,8 +86,6 @@ export default {
       background-color: transparent;
       border: none;
       font-size: 1.5rem;
-      &:hover{
-      }
     }
     }
 }
