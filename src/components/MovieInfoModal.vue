@@ -4,7 +4,7 @@
   </div>
   <template v-if="modelValue">
     <div
-      v-if="(!isLoading && movieInfo.Title)"
+      v-if="!isLoading"
       class="modal"
       @click="offModal">
       <div
