@@ -1,13 +1,15 @@
 <template>
   <div class="buttons">
-    <button
+    <b-button
+      variant="light"
       @click="movePage('prev')">
       이전페이지
-    </button>
-    <button 
+    </b-button>
+    <b-button 
+      variant="light"
       @click="movePage('next')">
       다음 페이지
-    </button>
+    </b-button>
   </div>
 </template>
 
@@ -43,12 +45,6 @@ export default {
 .buttons {
   display: flex;
   justify-content: space-between;
-  margin: 0px 50px;
-}
-
-button {
-  background-color: transparent;
-  border: 0;
-  border-bottom: 1px solid black;
+  margin: 0 3rem;
 }
 </style>

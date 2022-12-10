@@ -1,13 +1,12 @@
 <template>
   <form
-    class="main__seacrh"
+    class="seacrh"
     @submit.prevent="searchMovie">
     <b-form-input
       v-model="text"
       @input="searchTitle(text)" />
     <b-button
-      pill
-      variant="outline-secondary"
+      variant="primary"
       type="submit">
       검색
     </b-button>
@@ -48,5 +47,14 @@ export default {
 .form-control{
   width: 700px;
   margin-right: 10px; 
+}
+
+.seacrh{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0px
 }
 </style>

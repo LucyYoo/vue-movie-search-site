@@ -17,7 +17,7 @@
     left: 0;
     right: 0;
     z-index: 10;
-    background-color: rgba(black, .5);
+    background-color: $background--modal-color;
     display: flex;
         justify-content: center;
         align-items: center;

@@ -1,49 +1,45 @@
-<template class="movieList-container">
+<template>
   <ul class="main__moveList">
     <MovieInfoModal
       v-if="movieList.length > 0"
       v-model="isShow">
       <div
         :class="{wrapper: isShow}"
-        class="movieList-container">
+        class="movieList__container">
         <li
           v-for="movie in movieList"
           :key="movie.imdbID">
-          <b-card
-            :title="movie.Title"
-            :img-src="movie.Poster"
-            img-top
-            img-width="250px"
-            img-height="400px"
+          <div
+            class="card"
             @click="viewMovieinfo(movie.imdbID); modal()">
-            <b-card-text>
-              {{ movie.Year }}
-            </b-card-text>
-          </b-card>
+            <img
+              class="card-img-top"
+              :src="movie.Poster"
+              alt="영화 포스터" />
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ movie.Title }}
+              </h5>
+              <p class="card-text">
+                {{ movie.Year }}
+              </p>
+            </div>
+          </div>
         </li>
       </div>
-      <Buttons />
-      <template
-        #movieInfoModal>
-        <div
-          class="modal-container">
-          <h3>{{ movieInfo.Title }}</h3>
-          <img :src="movieInfo.Poster" />
-          <p>{{ movieInfo.Plot }}</p>
-        </div>
-      </template>
+      <PageButtons />
     </MovieInfoModal>
   </ul>
 </template>
 
 <script>
 import MovieInfoModal from'~/components/MovieInfoModal';
-import Buttons from '~/components/Buttons';
+import PageButtons from '~/components/PageButtons';
 
 export default{
   components: {
     MovieInfoModal,
-    Buttons
+    PageButtons
   },
   data() {
     return {
@@ -54,9 +50,7 @@ export default{
     movieList() {
       return this.$store.state.fetch.movieList;
     },
-    movieInfo() {
-      return this.$store.state.fetch.movieInfo;
-    },
+    
   },
   methods: {
     modal() {
@@ -72,31 +66,44 @@ export default{
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 li {
   margin: 20px;
-  width: 300px;
-  height: 500px; 
+  width: 280px;
+  height: 400px; 
   list-style-type: none;
 }
 
-.modal-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+
 .wrapper {
   height: 100%;
   overflow: hiiden;
 }
 
-.movieList-container {
+.movieList__container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+.card {
+  width: 252px;
+  transition: all 0.2s linear;
+  &-img-top{
+    width: 250px;
+    height: 300px;
+  }
+  &-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  }
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 10px 10px $box--shadow-color;
+    cursor: pointer;
+  }
 }
 
 </style>

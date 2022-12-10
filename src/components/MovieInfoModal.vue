@@ -15,7 +15,26 @@
           @click="offModal">
           x
         </button>
-        <slot name="movieInfoModal"></slot>
+        <div>
+          <div
+            class="modal__container">
+            <h2 class="modal__title">
+              {{ movieInfo.Title }}
+            </h2>
+            <img
+              class="modal__poster"
+              :src="movieInfo.Poster"
+              alt="영화 포스터" />
+            <div class="modal__info">
+              <div>개봉일: {{ movieInfo.Released }}</div>
+              <div>감독: {{ movieInfo.Director }}</div>            
+              <div>⭐ {{ movieInfo.Ratings[0].Value }}</div>
+            </div>                                   
+            <p class="modal__plot">
+              {{ movieInfo.Plot }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </template>
@@ -35,12 +54,17 @@ export default {
     isLoading() {
       return this.$store.state.fetch.isLoading;
     },
+    movieInfo() {
+      return this.$store.state.fetch.movieInfo;
+    },
   },
   watch: {
     modelValue(newValue) {
       if(newValue){
+        document.querySelector("body").classList.add("scroll-hidden");
         window.addEventListener('keyup', this.keyupHandler);
       } else {
+        document.querySelector("body").classList.remove("scroll-hidden");
         window.removeEventListener('keyup', this.keyupHandler);
       }
     }
@@ -61,7 +85,7 @@ export default {
 
 <style lang="scss" scoped>
 .modal{
-    background-color: rgba(black, .5);
+    background-color: $background--modal-color;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -71,21 +95,37 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    }
     &__inner {
         box-sizing: border-box;
-        background-color: white;
-        padding: 1rem 2rem;
+        background-color: $modal--color;
+        padding: 0.5rem 2rem;
         border-radius: 10px;
-        max-width: 800px;
-        max-height: 900px;
+        width: 800px;
+        height: 900px;
         overflow-y: auto;
-        box-shadow: 0px 10px 10px rgba(black, .2);
+        box-shadow: 0px 10px 10px $box--shadow-color;
         text-align: right;
     &--close{
       background-color: transparent;
       border: none;
       font-size: 1.5rem;
     }
+    }
+    &__title{
+      font-weight: 600;
+      padding: 1rem 0;
+    }
+    &__info{
+      text-align: left;
+      margin-right: auto;
+      padding: 20px;
     }
 }
 </style>

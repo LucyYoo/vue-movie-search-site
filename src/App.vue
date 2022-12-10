@@ -1,21 +1,23 @@
-<template class="main">
-  <HeaderTitle />
-  <template v-if="isLoading">
-    <Loading />
-  </template>
-  <Search class="main__search" />
+<template>
+  <div class="main">
+    <HeaderTitle />
+    <template v-if="isLoading">
+      <Loading />
+    </template>
+    <MainContainer />
+  </div>
 </template>
 
 <script>
 import HeaderTitle from '~/components/HeaderTitle';
 import Loading from '~/components/Loading';
-import Search from '~/components/Search';
+import MainContainer from '~/components/MainContainer';
 
 export default {
   components: {
     Loading,
     HeaderTitle,
-    Search,
+    MainContainer,
   },
   computed: {
     isLoading() {
@@ -30,18 +32,5 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  &__title{
-  text-align: center;
-  margin-top: 100px;
-}
-
-  &__seacrh{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 20px 0px
-}
 }
 </style>

@@ -1,5 +1,13 @@
 <template>
-  <h1 class="main__title">
-    영화 검색
-  </h1>
+  <h3 class="main__title">
+    원하는 영화를 검색해보세요!
+  </h3>
 </template>
+
+<style scoped>
+.main__title{
+  font-weight: 600;
+  text-align: center;
+  margin-top: 100px;
+}
+</style>

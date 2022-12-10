@@ -9,7 +9,6 @@ export default {
       currentPage: 1,
     };
   },
-  getters: {},
   mutations: {
     changeMovieList (state, payload) {
       state.movieList = payload.Search;
