@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.state.fetch.isLoading;
+      return this.$store.state.movie.isLoading;
     },
   },
 };

@@ -1,8 +1,8 @@
 import { createStore } from "vuex";
-import fetch from "./fetch";
+import movie from "./movie";
 
 export default createStore({
   modules: {
-    fetch,
+    movie,
   },
 });

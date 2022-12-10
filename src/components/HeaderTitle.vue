@@ -8,6 +8,6 @@
 .main__title{
   font-weight: 600;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 7rem;
 }
 </style>

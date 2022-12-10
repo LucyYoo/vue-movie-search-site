@@ -52,10 +52,10 @@ export default {
   emits: ['update:modelValue'],
   computed: {
     isLoading() {
-      return this.$store.state.fetch.isLoading;
+      return this.$store.state.movie.isLoading;
     },
     movieInfo() {
-      return this.$store.state.fetch.movieInfo;
+      return this.$store.state.movie.movieInfo;
     },
   },
   watch: {
@@ -103,19 +103,24 @@ export default {
     text-align: center;
     }
     &__inner {
+      position: relative;
         box-sizing: border-box;
         background-color: $modal--color;
         padding: 0.5rem 2rem;
         border-radius: 10px;
-        width: 800px;
-        height: 900px;
+        width: 600px;
+        height: 700px;
         overflow-y: auto;
         box-shadow: 0px 10px 10px $box--shadow-color;
         text-align: right;
     &--close{
+      position: fixed;
       background-color: transparent;
       border: none;
       font-size: 1.5rem;
+      width: 30px;
+      height: 30px;
+      padding-right: 20px;
     }
     }
     &__title{

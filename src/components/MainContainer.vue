@@ -23,21 +23,21 @@ export default {
   },
   computed: {
     title(){
-      return this.$store.state.fetch.title;
+      return this.$store.state.movie.title;
     },
     currentPage(){
-      return this.$store.state.fetch.currentPage;
+      return this.$store.state.movie.currentPage;
     }
   },
   methods: {
     async searchMovie(){
-      await this.$store.dispatch("fetch/fetchMovieList", {
+      await this.$store.dispatch("movie/fetchMovieList", {
         title: this.title,
       });
-      this.$store.commit(`fetch/movePage`, 'reset');
+      this.$store.commit(`movie/movePage`, 'reset');
     },
     searchTitle(text){
-      this.$store.commit('fetch/searchTitle', text);
+      this.$store.commit('movie/searchTitle', text);
     }
   }
 };

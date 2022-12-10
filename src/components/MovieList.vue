@@ -1,5 +1,7 @@
 <template>
-  <ul class="main__moveList">
+  <ul
+    v-if="movieList"
+    class="main__moveList">
     <MovieInfoModal
       v-if="movieList.length > 0"
       v-model="isShow">
@@ -30,6 +32,11 @@
       <PageButtons />
     </MovieInfoModal>
   </ul>
+  <div
+    v-else
+    class="nothing">
+    검색한 결과가 없습니다!
+  </div>
 </template>
 
 <script>
@@ -48,7 +55,7 @@ export default{
   },
   computed: {
     movieList() {
-      return this.$store.state.fetch.movieList;
+      return this.$store.state.movie.movieList;
     },
     
   },
@@ -58,7 +65,7 @@ export default{
     },
     viewMovieinfo(imdbID) {
       this.isShow = true;
-      this.$store.dispatch("fetch/fetchMoiveInfo", {
+      this.$store.dispatch("movie/fetchMoiveInfo", {
         imdbID: imdbID
       });
     },
@@ -73,7 +80,6 @@ li {
   height: 400px; 
   list-style-type: none;
 }
-
 
 .wrapper {
   height: 100%;
@@ -106,4 +112,8 @@ li {
   }
 }
 
+.nothing{
+  text-align: center;
+  color: $font--color-gray;
+}
 </style>

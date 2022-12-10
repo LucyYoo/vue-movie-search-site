@@ -34,32 +34,28 @@ export default {
     fetchMovieList: async ({commit, state}, payload) =>  {
       const { title = state.title, page } = payload;
       const url = `&s=${title}&page=${page}`;
-      try {
-        commit('loadingMovie');
-        const movieList = await fetchMovie({
-          method: "GET",
-          url
-        });
-        commit('changeMovieList', movieList);
-        commit('loadingMovie');
-      } catch (e) {
-        console.error(e.message);
-      }
+      
+      commit('loadingMovie');
+      const movieList = await fetchMovie({
+        method: "GET",
+        url
+      });
+      
+      commit('changeMovieList', movieList);
+      commit('loadingMovie');
     },
     fetchMoiveInfo: async ({commit}, payload) => {
       const {imdbID} = payload;
       const url = `&i=${imdbID}&plot=full`;
-      try{
-        commit('loadingMovie');
-        const movieInfo = await fetchMovie({
-          method: "GET",
-          url
-        });
-        commit('viewMovieInfo', movieInfo);
-        commit('loadingMovie');
-      } catch(e) {
-        console.error(e.message);
-      }
+      
+      commit('loadingMovie');
+      const movieInfo = await fetchMovie({
+        method: "GET",
+        url
+      });
+
+      commit('viewMovieInfo', movieInfo);
+      commit('loadingMovie');
     },
   },
 };
