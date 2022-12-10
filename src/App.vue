@@ -4,21 +4,18 @@
     <Loading />
   </template>
   <Search class="main__search" />
-  <MovieList />
 </template>
 
 <script>
 import HeaderTitle from '~/components/HeaderTitle';
 import Loading from '~/components/Loading';
 import Search from '~/components/Search';
-import MovieList from '~/components/MovieList';
 
 export default {
   components: {
     Loading,
     HeaderTitle,
     Search,
-    MovieList
   },
   computed: {
     isLoading() {

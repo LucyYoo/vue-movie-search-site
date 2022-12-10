@@ -22,17 +22,7 @@
           </b-card>
         </li>
       </div>
-      <div class="buttons">
-        <button
-          @click="movePage('prev')">
-          이전페이지
-        </button>
-        <button 
-          @click="movePage('next')">
-          다음 페이지
-        </button>
-      </div>
-      
+      <Buttons />
       <template
         #movieInfoModal>
         <div
@@ -48,15 +38,16 @@
 
 <script>
 import MovieInfoModal from'~/components/MovieInfoModal';
-  
+import Buttons from '~/components/Buttons';
+
 export default{
   components: {
-    MovieInfoModal
+    MovieInfoModal,
+    Buttons
   },
   data() {
     return {
       isShow: false,
-      page: 1,
     };
   },
   computed: {
@@ -68,23 +59,15 @@ export default{
     },
   },
   methods: {
-    async viewMovieinfo(imdbID) {
+    modal() {
       this.isShow = true;
-      await this.$store.dispatch("fetch/fetchMoiveInfo", {
+    },
+    viewMovieinfo(imdbID) {
+      this.isShow = true;
+      this.$store.dispatch("fetch/fetchMoiveInfo", {
         imdbID: imdbID
       });
     },
-    movePage(page){
-      if(page === 'prev'){
-        this.page > 1 ? this.page -= 1 : this.page;
-      } else if( page === 'next') {
-        this.page < 100 ? this.page += 1 : this.page;
-      }
-      this.searchMovie();
-    },
-    modal() {
-      this.isShow = true;
-    }
   },
 };
 </script>
@@ -104,13 +87,6 @@ li {
   align-items: center;
   text-align: center;
 }
-
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  margin: 0px 50px;
-}
-
 .wrapper {
   height: 100%;
   overflow: hiiden;

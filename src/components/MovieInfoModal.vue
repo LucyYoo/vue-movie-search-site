@@ -48,7 +48,6 @@ export default {
   methods: {
     keyupHandler(event) {
       if(event.key === 'Escape') {
-        console.log('ESC!!');
         this.offModal();
       }
     },

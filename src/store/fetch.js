@@ -5,7 +5,8 @@ export default {
       movieList: [],
       movieInfo: {},
       isLoading: false,
-      page: 1,
+      title: '',
+      currentPage: 1,
     };
   },
   getters: {},
@@ -18,11 +19,21 @@ export default {
     },
     loadingMovie(state){
       state.isLoading = !state.isLoading;
+    },
+    searchTitle(state, title) {
+      state.title = title;
+    },
+    movePage(state, page){
+      if(typeof page === 'number'){
+        state.currentPage += page;
+        return;
+      }
+      state.currentPage = 1;
     }
   },
   actions: {
-    fetchMovieList: async ({commit}, payload) =>  {
-      const { title, page = 1 } = payload;
+    fetchMovieList: async ({commit, state}, payload) =>  {
+      const { title = state.title, page } = payload;
       const url = `&s=${title}&page=${page}`;
       try {
         commit('loadingMovie');
