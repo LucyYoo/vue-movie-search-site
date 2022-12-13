@@ -3,7 +3,7 @@
     <slot></slot>
   </div>
   <template v-if="modelValue">
-    <div
+    <section
       v-if="!isLoading"
       class="modal"
       @click="offModal">
@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </template>
 </template>
 

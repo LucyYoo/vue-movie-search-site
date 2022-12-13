@@ -1,10 +1,10 @@
 <template>
-  <div class="loading">
+  <section class="loading">
     <img
       class="loading__img"
       src="https://cdn.roto.codes/images/nyan-cat.gif"
       alt="loading" />
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

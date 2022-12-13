@@ -1,5 +1,5 @@
 <template>
-  <div class="buttons">
+  <section class="buttons">
     <b-button
       variant="light"
       @click="movePage('prev')">
@@ -10,7 +10,7 @@
       @click="movePage('next')">
       다음 페이지
     </b-button>
-  </div>
+  </section>
 </template>
 
 <script>
